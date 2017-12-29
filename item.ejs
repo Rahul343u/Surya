@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- JSZip library -->
+<title>Taffy Planning</title>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+ <link rel="stylesheet" src="css/style_nav">
+
+<style>
+<style>
+body {margin:0;}
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+
+}
+table.fixed table.fixed { table-layout:fixed; width:90px; word-break:break-all;}{ table-layout:fixed; }
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+
+</style></style>
+<link rel='stylesheet prefetch' href='http://cdn.datatables.net/1.10.12/css/jquery.dataTables.css'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js">            </script>
+</head>
+<body>
+
+<div class>
+
+			<form class="form-signin" style="padding-top:100px;" method="post" action="/items/testcases"  id="login_form">
+			        <div class="row">
+							<div class="col-sm-4" style="width:300px;padding-left:20px;" >
+									<select class="form-control " name="project_id" id="project_id">
+									<option selected="true" disabled="disabled">Choose Project</option>
+									<% for(var i=0; i < proje.length; i++) { %>
+									<option value="<%= proje[i].name %>">"<%= proje[i].name %>"</option>
+									<% } %>
+									</select>
+							</div>
+
+							<div class="col-sm-2" style="width:300px;">
+								<select class="form-control" name="Testcasetag" id="Testcasetag">
+								</select>
+							</div>
+
+							<div class="col-sm-2">
+							<button type="button" class="btn btn-default load" name="btn-save2" id="btn-submit2" >Load</button>
+                            </div>
+
+							<div class="col-sm-3">
+							<button class="btn btn-default export" style="float:right;">Export</button>
+							</div>
+              <br><br>
+							<div class="col-sm-2">
+							<div class="input-group">
+							<span class="input-group-addon">
+								<i class="glyphicon glyphicon-search"></i>
+							</span>
+					       <input type="text" class="form-control search" id="myInput" onkeyup="myFunction()" placeholder="Search for testcases" title="Type in a name" style="width:250px;">
+							</div>
+							</div>
+					</div>
+
+			</form>
+</div></br>
+
+
+
+<div id="tableWrap">
+
+		<table id="myTable" class="table table-striped" cellspacing="0" width="100%" border="3">
+		  <col width="80px" />
+		  <col width="130px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="80px" />
+		  <col width="80px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="30px" />
+		  <col width="80px" />
+		  <col width="130px" />
+		<thead>
+				<tr>
+				       <th>Test Script/Test Case Title(Text)</th>
+						<th>Test Script/Test Case Description(Text)</th>
+						<th>Creator(Text)-TestScript</th>
+						<th>Owner(Text)-TestScript</th>
+						<th>Step Description(Text)-TestScript</th>
+						<th>Expected Result(Text)-TestScript</th>
+						<th>weight(Text)</th>
+						<th>Priority(Text)</th>
+						<th>Estimate in hour(Text)</th>
+						<th>Application(Text) (Name : MOTSID)</th>
+						<th>Regression/Progression(Text)</th>
+						<th>TestPhase(Text)</th>
+						<th>Non MOTS Team(Text)</th>
+						<th>User 1(Text)</th>
+						<th>User 2(Text)</th>
+						<th>User 3(Text)</th>
+						<th>User 4(Text)</th>
+						<th>User 5(Text)</th>
+						<th>Test Description(Text)</th>
+						<th>Expected Result(Text)-TestCase</th>
+						<th>Interface</th>
+				</tr>
+		</thead>
+		<tbody>
+		<th>
+		<% for(var i=0; i < res.length; i++) { %>
+				<% for(var j=0; j < res[i].actiondetails.length; j++) { %>
+				   <% if( j == 0 )
+						   { %>
+									<tr>
+
+									<td contenteditable='true'><%= res[i].name %></td>
+									<td contenteditable='true'><%= res[i].description %></td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'><%= res[i].actiondetails[j].name %></td>
+									<td contenteditable='true'><%= res[i].actiondetails[j].description %></td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'><%= res[i].name %></td>
+									<td contenteditable='true'><%= res[i].description %></td>
+									</tr>
+						   <% } else{ %>
+									<tr>
+
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'><%= res[i].actiondetails[j].name %></td>
+									<td contenteditable='true'><%= res[i].actiondetails[j].description %></td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									<td contenteditable='true'> </td>
+									</tr>
+								<% } %>
+						<% } %>
+				<% } %>
+
+		</tbody>
+		</table>
+	</div>
+<script>
+$('select#project_id').change(function() {
+		$.ajax({
+		 url: "/items/getTestcastags",
+		type: "POST",
+		data: {project_id:$(this).val()},
+		dataType:"json",
+		success: function(data)
+		{
+			$("#Testcasetag").empty();
+			for(var i=0;i<data.testtagname.length;i++){
+			$("#Testcasetag").append($("<option></option>").val(data.testtagname[i].value).html(data.testtagname[i].value));
+			}
+
+		}
+
+    });
+});
+
+</script>
+<script>
+$('button#btn-submit2').click(function() {
+
+    /*  var formData = {
+      project_id = $('select[id=project_id]').val(),
+      tag = $('select[id=Testcasetag]').val()
+    }; */
+		$.ajax({
+		 url: "/items/testcases",
+		type: "POST",
+	data: {project_id:$('select[id=project_id]').val() , tag :$('select[id=Testcasetag]').val() },
+  //  data: formData,
+		dataType:"json",
+		success: function(data)
+		{
+console.log(data);
+var res = data;
+for (var i=0; i<data.length; i++){
+        var td;
+        var tr=document.createElement('tr');
+
+            td = document.createElement('td');
+            td.innerHTML=data[i].name;
+            tr.appendChild(td);
+
+            td = document.createElement('td');
+            td.innerHTML=data[i].description;
+            tr.appendChild(td);
+
+        $('#myTable').append(tr);
+		}
+
+    });
+});
+
+</script>
+
+<script type="text/javascript">
+$(function(){
+    $('.export').click(function(){
+        var url='data:application/vnd.ms-excel,' + encodeURIComponent($('#tableWrap').html())
+        location.href=url
+        return false
+    })
+})
+</script>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+<script>
+$('.selectall').click(function() {
+    if ($(this).is(':checked')) {
+        $('.case').attr('checked', true);
+    } else {
+        $('.case').attr('checked', false);
+    }
+});
+</script>
+
+</body>
+</html>
